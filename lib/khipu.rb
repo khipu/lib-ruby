@@ -25,7 +25,7 @@ module Khipu
       '200x50white' => '200x50-w.png',
       '200x75'      => '200x75.png',
       '200x75white' => '200x75-w.png',
-  }.inject({}) { |h, (k, v)| h[k] = 'htps://s3.amazonaws.com/static.khipu.com/buttons/' + v; h }
+  }.inject({}) { |h, (k, v)| h[k] = 'https://s3.amazonaws.com/static.khipu.com/buttons/' + v; h }
 
   def self.create_khipu_api(receiver_id, secret = '')
     KhipuApiEndpoint.new(receiver_id, secret)
