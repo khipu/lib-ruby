@@ -93,6 +93,28 @@ module Khipu
       execute(endpoint, params)
     end
 
+    def create_receiver(args)
+      endpoint = 'createReceiver'
+      check_arguments(args, [:first_name, :last_name, :email, :identifier, :bussiness_category, :bussiness_name,
+                             :phone, :address_line_1, :address_line_2, :address_line_3, :country_code])
+      params = {
+          receiver_id: @receiver_id,
+          first_name: args[:first_name],
+          last_name: args[:last_name],
+          email: args[:email],
+          notify_url: args[:notify_url] || '',
+          identifier: args[:identifier],
+          bussiness_category: args[:bussiness_category],
+          bussiness_name: args[:bussiness_name],
+          phone: args[:phone],
+          address_line_1: args[:address_line_1],
+          address_line_2: args[:address_line_2],
+          address_line_3: args[:address_line_3],
+          country_code: args[:country_code]
+      }
+      execute(endpoint, params)
+    end
+
     def receiver_banks
       endpoint = 'receiverBanks'
       params = {
