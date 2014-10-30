@@ -58,7 +58,7 @@ module Khipu
     end
 
     def hmac_sha256(secret, data)
-      OpenSSL::HMAC.digest(OpenSSL::Digest::Digest.new('sha256'), secret, data).unpack('H*').first
+      OpenSSL::HMAC.digest(OpenSSL::Digest.new('sha256'), secret, data).unpack('H*').first
     end
 
     def concatenated(params)
