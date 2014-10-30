@@ -12,8 +12,8 @@ module Khipu
       @secret = secret
     end
 
-    def post(endpoint, params, json_response = true)
-      uri = URI(Khipu::API_URL + endpoint)
+    def post(endpoint, params, json_response = true, base_url = Khipu::API_URL)
+      uri = URI(base_url + endpoint)
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
       if Khipu::DEBUG

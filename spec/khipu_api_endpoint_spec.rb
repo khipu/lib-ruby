@@ -30,7 +30,7 @@ describe Khipu::KhipuApiEndpoint do
     subject { api.create_receiver(receiver_params) }
 
     before do
-      stub_request(:post, "https://khipu.com/api/1.3/createReceiver")
+      stub_request(:post, "https://khipu.com/integratorApi/1.3/createReceiver")
       .to_return(body: return_params.to_json)
     end
 
