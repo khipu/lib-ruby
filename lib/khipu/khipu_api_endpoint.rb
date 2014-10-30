@@ -7,12 +7,12 @@ module Khipu
       super(receiver_id, secret)
     end
 
-    def execute(endpoint, params, add_hash = true, json_response = true)
+    def execute(endpoint, params, add_hash = true, json_response = true, base_url = Khipu::API_URL)
       post_params = params.clone
       if add_hash
         post_params['hash'] = hmac_sha256(@secret, concatenated(params))
       end
-      post(endpoint, post_params, json_response)
+      post(endpoint, post_params, json_response, base_url)
     end
 
     def payment_status(args)
@@ -89,28 +89,6 @@ module Khipu
           return_url: args[:return_url] || '',
           cancel_url: args[:cancel_url] || '',
           picture_url: args[:picture_url] || ''
-      }
-      execute(endpoint, params)
-    end
-
-    def create_receiver(args)
-      endpoint = 'createReceiver'
-      check_arguments(args, [:first_name, :last_name, :email, :identifier, :bussiness_category, :bussiness_name,
-                             :phone, :address_line_1, :address_line_2, :address_line_3, :country_code])
-      params = {
-          receiver_id: @receiver_id,
-          first_name: args[:first_name],
-          last_name: args[:last_name],
-          email: args[:email],
-          notify_url: args[:notify_url] || '',
-          identifier: args[:identifier],
-          bussiness_category: args[:bussiness_category],
-          bussiness_name: args[:bussiness_name],
-          phone: args[:phone],
-          address_line_1: args[:address_line_1],
-          address_line_2: args[:address_line_2],
-          address_line_3: args[:address_line_3],
-          country_code: args[:country_code]
       }
       execute(endpoint, params)
     end
@@ -200,7 +178,29 @@ module Khipu
       verify_signature(params, args[:notification_signature])
     end
 
+    # Integrator API
 
+    def create_receiver(args)
+      endpoint = 'createReceiver'
+      check_arguments(args, [:email, :first_name, :last_name, :notify_url, :identifier, :bussiness_category, :bussiness_name,
+                             :phone, :address_line_1, :address_line_2, :address_line_3, :country_code])
+      params = {
+          receiver_id: @receiver_id,
+          email: args[:email],
+          first_name: args[:first_name],
+          last_name: args[:last_name],
+          notify_url: args[:notify_url],
+          identifier: args[:identifier],
+          bussiness_category: args[:bussiness_category],
+          bussiness_name: args[:bussiness_name],
+          phone: args[:phone],
+          address_line_1: args[:address_line_1],
+          address_line_2: args[:address_line_2],
+          address_line_3: args[:address_line_3],
+          country_code: args[:country_code]
+      }
+      execute(endpoint, params, true, true, Khipu::INTEGRATOR_API_URL)
+    end
 
   end
 end

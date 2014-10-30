@@ -8,6 +8,7 @@ require 'khipu/const'
 module Khipu
 
   API_URL = 'https://khipu.com/api/1.3/'
+  INTEGRATOR_API_URL = 'https://khipu.com/integratorApi/1.3/'
   DEBUG = ENV['KHIPU_DEBUG'] || false
   FORM_BUTTONS = {
       '50x25'       => '50x25.png',
