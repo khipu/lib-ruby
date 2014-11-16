@@ -212,5 +212,28 @@ module Khipu
       execute(endpoint, params, true, true, Khipu::INTEGRATOR_API_URL)
     end
 
+    def create_integrator_payment_url(args)
+      endpoint = 'createPaymentURL'
+      check_arguments(args, [:subject, :amount, :integrator_fee])
+      params = {
+          receiver_id: @receiver_id,
+          subject: args[:subject],
+          body: args[:body] || '',
+          amount: args[:amount],
+          integrator_fee: args[:integrator_fee],
+          payer_email: args[:payer_email] || '',
+          bank_id: args[:bank_id] || '',
+          expires_date: args[:expires_date] || '',
+          transaction_id: args[:transaction_id] || '',
+          custom: args[:custom] || '',
+          notify_url: args[:notify_url] || '',
+          return_url: args[:return_url] || '',
+          cancel_url: args[:cancel_url] || '',
+          picture_url: args[:picture_url] || ''
+      }
+      resp = execute(endpoint, params, true, true, Khipu::INTEGRATOR_API_URL)
+      resp_items = %w(id url mobile_url)
+      resp.select{|key, value| resp_items.include?(key)}
+    end
   end
 end
