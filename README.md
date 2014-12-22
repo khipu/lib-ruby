@@ -4,8 +4,6 @@
 
 Gema Ruby para utilizar los servicios de Khipu.com
 
-Versión Biblioteca: 1.3.0
-
 Versión API Khipu: 1.3
 Versión API de notificación: 1.2
 
