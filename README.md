@@ -1,5 +1,7 @@
 # khipu
 
+[![Build Status](https://travis-ci.org/khipu/lib-ruby.png)](https://travis-ci.org/khipu/lib-ruby)
+
 [khipu - Yo pago, Yo cobro](https://khipu.com)
 
 Gema Ruby para utilizar los servicios de Khipu.com
