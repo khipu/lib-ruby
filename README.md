@@ -31,7 +31,8 @@ Esta biblioteca implementa los siguientes servicios de khipu:
 4. Crear una página de Pago (autenticado).
 5. Crear un pago y obtener us URL.
 6. Crear un pago y obtener us URL (autenticado).
-7. Recibir y validar la notificación de un pago.
+7.1. Recibir y validar la notificación de un pago (API de notificación 1.3 o superior).
+7.2. Recibir y validar la notificación de un pago (API de notificación 1.2 o inferior).
 8. Verificar el estado de una cuenta de cobro.
 9. Verificar el estado de un pago.
 10. Marcar un pago como pagado.
@@ -128,6 +129,7 @@ para pagar debe estar asociada al RUT indicado.
 
 Este ejemplo contacta a khipu para obtener la notificación de un pago a partir de un token de notificación.
 El resultado contiene el receiver_id, transaction_id, amount, currency, etc con lo que se debe el pago contra el backend.
+En este ejemplo los parámetros se configuran a mano, pero en producción los datos deben obtenerse desde el request _request html_.
 
 ```Ruby
     begin
