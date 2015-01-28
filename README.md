@@ -123,8 +123,24 @@ para pagar debe estar asociada al RUT indicado.
         puts error.message
     end
 ```
-Se puede obtener una
-### 7) Validar la notificación de un pago.
+
+### 7.1) Validar la notificación de un pago (API de notificación 1.3 o superior)
+
+Este ejemplo contacta a khipu para obtener la notificación de un pago a partir de un token de notificación.
+El resultado contiene el receiver_id, transaction_id, amount, currency, etc con lo que se debe el pago contra el backend.
+
+```Ruby
+    begin
+        service = Khipu.create_khipu_api(ID_DEL_COBRADOR, SECRET_DEL_COBRADOR)
+        params = {notification_token: 'j8kPBHaPNy3PkCh...hhLvQbenpGjA'}
+        map = service.get_payment_notification(params)
+    rescue Khipu::ApiError => error
+        puts error.type
+        puts error.message
+    end
+``````
+
+### 7.2) Validar la notificación de un pago (API de notificación 1.2 o inferior).
 
 Este ejemplo contacta a khipu para validar los datos de una transacción. Para usar
 este servicio no es necesario configurar el SECRET del cobrador. Se retorna true si la información del la notificación
