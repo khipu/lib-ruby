@@ -173,9 +173,19 @@ module Khipu
           currency: args[:currency] || 'CLP',
           transaction_id: args[:transaction_id] || '',
           payer_email: args[:payer_email] || '',
-          custom: args[:custom] || '',
+          custom: args[:custom] || ''
       }
       verify_signature(params, args[:notification_signature])
+    end
+
+    def get_payment_notification(args)
+      endpoint = 'getPaymentNotification'
+      check_arguments(args, [:notification_token])
+      params = {
+          receiver_id: @receiver_id,
+          notification_token: args[:notification_token]
+      }
+      execute(endpoint, params)
     end
 
     # Integrator API
