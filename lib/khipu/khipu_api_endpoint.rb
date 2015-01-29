@@ -180,8 +180,9 @@ module Khipu
 
     def get_payment_notification(args)
       endpoint = 'getPaymentNotification'
-      check_arguments(args, [:api_version, :notification_token])
+      check_arguments(args, [:notification_token])
       params = {
+          receiver_id: @receiver_id,
           notification_token: args[:notification_token]
       }
       execute(endpoint, params)

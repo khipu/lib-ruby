@@ -63,7 +63,7 @@ a este cobro. Por cada pago se tiene el ID, el correo asociado y la URL en khipu
 ```Ruby
     begin 
         service = Khipu.create_khipu_api(ID_DEL_COBRADOR, SECRET_DEL_COBRADOR)
-        map = service.create_email({subject: 'Un cobro desde Ruby', amount: '10', destinataries: [ {name: "John Doe", email: "john.doe@gmail.com", amount: "1000"}, {name: "Jane Dow", email: "jane.dow@gmail.com", amount: "1000"}], pay_directly: true, send_emails: true})
+        map = service.create_email({subject: 'Un cobro desde Ruby', destinataries: [ {name: "John Doe", email: "john.doe@gmail.com", amount: "1000"}, {name: "Jane Dow", email: "jane.dow@gmail.com", amount: "1000"}], pay_directly: true, send_emails: true})
     rescue Khipu::ApiError => error
         puts error.type
         puts error.message
@@ -140,6 +140,22 @@ En este ejemplo los parámetros se configuran a mano, pero en producción los da
         puts error.type
         puts error.message
     end
+``````
+
+En map queda un hash con los valores de la notificación:
+
+```Ruby
+    {
+        "notification_token"=>"j8kPBHaPNy3PkCh...hhLvQbenpGjA",
+        "receiver_id"=>ID_DEL_COBRADOR,
+        "subject"=>"Motivo del cobro",
+        "amount"=>"100",
+        "custom"=>"",
+        "transaction_id"=>"MTX_123123",
+        "payment_id"=>"qpclzun1nlej",
+        "currency"=>"CLP",
+        "payer_email"=>"ejemplo@gmail.com"
+    }
 ``````
 
 ### 7.2) Validar la notificación de un pago (API de notificación 1.2 o inferior).
